@@ -31,14 +31,18 @@ pip install -r requirements.txt
 python scripts/run_eval.py --config configs/default.yaml
 ```
 
-Sample output:
+Sample output (`results/sample_run.json`):
 
-```
-retrieval.recall@5     0.78
-retrieval.mrr          0.61
-gen.faithfulness       0.84
-gen.citation_coverage  0.71
-latency.p95_ms         412
+```json
+{
+  "metrics": {
+    "retrieval.recall_at_k": 0.5,
+    "retrieval.mrr": 0.5,
+    "gen.faithfulness": 0.8,
+    "gen.citation_coverage": 1.0,
+    "latency.p95_ms": 16.8
+  }
+}
 ```
 
 ## Project layout

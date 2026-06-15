@@ -4,4 +4,5 @@ __pycache__/
 .pytest_cache/
 .chroma/
 results/*.json
+!results/sample_run.json
 !.gitkeep
