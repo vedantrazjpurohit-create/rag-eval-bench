@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 import re
 
 
@@ -16,6 +17,23 @@ def mrr(retrieved_doc_ids: list[str], gold_doc_ids: list[str]) -> float:
         if doc_id in gold_doc_ids:
             return 1.0 / rank
     return 0.0
+
+
+def ndcg_at_k(retrieved_doc_ids: list[str], gold_doc_ids: list[str], k: int) -> float:
+    if not gold_doc_ids:
+        return 0.0
+
+    gold = set(gold_doc_ids)
+    dcg = 0.0
+    for rank, doc_id in enumerate(retrieved_doc_ids[:k], start=1):
+        rel = 1.0 if doc_id in gold else 0.0
+        dcg += rel / math.log2(rank + 1)
+
+    ideal_hits = min(len(gold_doc_ids), k)
+    idcg = sum(1.0 / math.log2(rank + 1) for rank in range(1, ideal_hits + 1))
+    if idcg == 0.0:
+        return 0.0
+    return dcg / idcg
 
 
 def faithfulness(answer: str, contexts: list[str]) -> float:

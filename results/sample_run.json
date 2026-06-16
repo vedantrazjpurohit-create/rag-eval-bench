@@ -4,6 +4,7 @@
   "metrics": {
     "retrieval.recall_at_k": 0.5,
     "retrieval.mrr": 0.5,
+    "retrieval.ndcg_at_k": 0.631,
     "gen.faithfulness": 0.8,
     "gen.citation_coverage": 1.0,
     "latency.p50_ms": 16.8,

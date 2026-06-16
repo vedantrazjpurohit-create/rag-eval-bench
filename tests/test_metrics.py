@@ -1,4 +1,4 @@
-from src.evaluation.metrics import citation_coverage, faithfulness, mrr, recall_at_k
+from src.evaluation.metrics import citation_coverage, faithfulness, mrr, ndcg_at_k, recall_at_k
 
 
 def test_recall_at_k():
@@ -10,6 +10,19 @@ def test_recall_at_k():
 def test_mrr_first_hit():
     retrieved = ["doc_x", "doc_target", "doc_y"]
     assert mrr(retrieved, ["doc_target"]) == 0.5
+
+
+def test_ndcg_at_k_perfect_ranking():
+    retrieved = ["doc_a", "doc_b", "doc_c"]
+    gold = ["doc_a", "doc_b"]
+    assert ndcg_at_k(retrieved, gold, k=3) == 1.0
+
+
+def test_ndcg_at_k_partial_credit():
+    retrieved = ["doc_x", "doc_a", "doc_b"]
+    gold = ["doc_a", "doc_b"]
+    score = ndcg_at_k(retrieved, gold, k=3)
+    assert 0.0 < score < 1.0
 
 
 def test_faithfulness_supported_claim():

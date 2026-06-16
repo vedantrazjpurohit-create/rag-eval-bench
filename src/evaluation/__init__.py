@@ -1,3 +1,3 @@
-from .metrics import citation_coverage, faithfulness, mrr, recall_at_k
+from .metrics import citation_coverage, faithfulness, mrr, ndcg_at_k, recall_at_k
 
-__all__ = ["recall_at_k", "mrr", "faithfulness", "citation_coverage"]
+__all__ = ["recall_at_k", "mrr", "ndcg_at_k", "faithfulness", "citation_coverage"]

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import yaml
 
-from src.evaluation.metrics import citation_coverage, faithfulness, mrr, recall_at_k
+from src.evaluation.metrics import citation_coverage, faithfulness, mrr, ndcg_at_k, recall_at_k
 from src.ingestion.chunker import chunk_text
 from src.ingestion.loaders import load_documents
 from src.retrieval.index import RetrievalIndex, stable_chunk_id
@@ -77,6 +77,7 @@ def run_pipeline(config_path: str | Path) -> dict:
 
     recall_scores: list[float] = []
     mrr_scores: list[float] = []
+    ndcg_scores: list[float] = []
     faith_scores: list[float] = []
     citation_scores: list[float] = []
     latencies: list[float] = []
@@ -89,6 +90,7 @@ def run_pipeline(config_path: str | Path) -> dict:
         retrieved_doc_ids = [h.doc_id for h in hits]
         recall_scores.append(recall_at_k(retrieved_doc_ids, item["gold_doc_ids"], k))
         mrr_scores.append(mrr(retrieved_doc_ids, item["gold_doc_ids"]))
+        ndcg_scores.append(ndcg_at_k(retrieved_doc_ids, item["gold_doc_ids"], k))
 
         answer = generate_answer(item["question"], hits)
         contexts = [h.text for h in hits]
@@ -105,6 +107,7 @@ def run_pipeline(config_path: str | Path) -> dict:
         "metrics": {
             "retrieval.recall_at_k": round(sum(recall_scores) / max(1, len(recall_scores)), 3),
             "retrieval.mrr": round(sum(mrr_scores) / max(1, len(mrr_scores)), 3),
+            "retrieval.ndcg_at_k": round(sum(ndcg_scores) / max(1, len(ndcg_scores)), 3),
             "gen.faithfulness": round(sum(faith_scores) / max(1, len(faith_scores)), 3),
             "gen.citation_coverage": round(sum(citation_scores) / max(1, len(citation_scores)), 3),
             "latency.p50_ms": round(p50, 1),
