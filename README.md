@@ -75,6 +75,12 @@ tests/           # unit tests for metrics
 
 Python 3.11 · ChromaDB · sentence-transformers · PyMuPDF · pydantic · pytest
 
+## Related repos
+
+- [rag-api](https://github.com/vedantrazjpurohit-create/rag-api) — deployable FastAPI wrapper
+- [aruco-localizer](https://github.com/vedantrazjpurohit-create/aruco-localizer) — vision / pose for robotics
+- [student-crud-c](https://github.com/vedantrazjpurohit-create/student-crud-c) — C systems fundamentals
+
 ---
 
 If you're hiring for applied LLM / retrieval work, the commit history here is intentionally boring — small PRs, measured changes, notes on what didn't work. That's the point.
