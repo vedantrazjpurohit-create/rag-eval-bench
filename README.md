@@ -1,5 +1,7 @@
 # rag-eval-bench
 
+> **Archived** — development continues in **[rag-system](https://github.com/vedantrazjpurohit-create/rag-system)** (merged API + eval bench + hybrid retrieval + router).
+
 Small RAG evaluation harness I built while trying to answer one question: **does my retrieval actually help, or am I just paying for embeddings?**
 
 Most tutorials stop at "build a chatbot." This repo measures what matters — retrieval precision, answer faithfulness, and latency — on a fixed corpus so you can compare chunk sizes, embedding models, and rerankers without guessing.
